@@ -165,7 +165,7 @@ int main(int argc, char** argv) {
   }
 
   int correct_count = 0;
-  int num_test_img = 10;   // Test images from CIFAR10
+  int num_test_img = 10000;   // Test images from CIFAR10
 
   for (int i = 0; i < num_test_img; i++){
 
