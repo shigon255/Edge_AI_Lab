@@ -4,6 +4,7 @@ from torch._export import capture_pre_autograd_graph
 from torch.export import export, ExportedProgram
 from torchvision.models import mobilenet_v2
 from executorch.exir import EdgeProgramManager, to_edge, ExecutorchProgramManager
+from executorch.backends.xnnpack.partition.xnnpack_partitioner import XnnpackPartitioner
 
 NUM_CLASSES = 10
 
@@ -21,9 +22,13 @@ print("ATen Dialect Graph")
 print(aten_dialect)
 
 edge_program: EdgeProgramManager = to_edge(aten_dialect)
+
+# delegate to xnn
+edge_program = edge_program.to_backend(XnnpackPartitioner)
+
 executorch_program: ExecutorchProgramManager = edge_program.to_executorch()
 
 # Serialize and save it to a file
-save_path = "mobilenet.pte"
+save_path = "xnn_mobilenet.pte"
 with open(save_path, "wb") as f:
     f.write(executorch_program.buffer)
