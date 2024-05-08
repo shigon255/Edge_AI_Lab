@@ -1,0 +1,3 @@
+mobilenetv2_ptq.pth is trained on windows, which can only run on windows
+mobilenetv2_ptq_colab.pth is trained on colab, which can only run on colab
+we need to hand in colab version

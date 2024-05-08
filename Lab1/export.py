@@ -24,6 +24,6 @@ edge_program: EdgeProgramManager = to_edge(aten_dialect)
 executorch_program: ExecutorchProgramManager = edge_program.to_executorch()
 
 # Serialize and save it to a file
-save_path = "mobilenet.pte"
+save_path = "mobilenet_test.pte"
 with open(save_path, "wb") as f:
     f.write(executorch_program.buffer)
